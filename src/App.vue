@@ -7,10 +7,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import feather from 'vue-icon';
+import Feather from 'vue-icon';
 import KeyboardDisplay from './components/KeyboardDisplay.vue';
 
-Vue.use(feather, 'v-icon');
+Vue.use(Feather, 'v-icon');
+
 export default Vue.extend({
   name: 'App',
   components: {
@@ -31,15 +32,21 @@ export default Vue.extend({
 
 body {
   background-color: --off-white;
-  margin-top: 50px;
   font-family: Arial;
+  font-size: 16px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
 }
 
 .mk-logo {
+  margin-top: 50px;
+  margin-bottom: 15px;
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  margin-bottom: 15px;
 }
 
 br {
@@ -48,9 +55,7 @@ br {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin-top: 50px;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;

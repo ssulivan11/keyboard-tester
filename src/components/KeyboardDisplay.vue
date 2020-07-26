@@ -23,6 +23,7 @@
           Delete
         </div>
       </div>
+
       <div class="row" data-test="row-numeric-keys">
         <div class="key key--symbols">
           ~
@@ -183,7 +184,7 @@
         <div class="key key--oneandhalf key--color-green">
           Shift
         </div>
-        <div class="key key--color-yellow">
+        <div class="key key--color-yellow" :class="{ active: this.keyboardObject.up }">
           <v-icon name="arrow-up" />
         </div>
         <div class="key key--color-gray">End</div>
@@ -193,23 +194,31 @@
         <div class="key key--color-red key--bottom-funct">Crtl</div>
         <div class="key key--bottom-funct key--symbols key--color-gray">alt <br />option</div>
         <div class="key key--bottom-funct key--symbols key--color-gray">
-          <v-icon name="command" /><br />command
+          <v-icon name="command" />command
         </div>
         <div class="key key--spacebar"></div>
-        <div class="key key--symbols key--color-gray"><v-icon name="command" /><br />command</div>
+        <div class="key key--symbols key--color-gray"><v-icon name="command" />cmd</div>
         <div class="key key--symbols key--color-gray">alt<br />option</div>
         <div class="key key--color-gray">Ctrl</div>
-        <div class="key key--color-yellow">
+        <div class="key key--color-yellow" :class="{ active: this.keyboardObject.left }">
           <v-icon name="arrow-left" />
         </div>
-        <div class="key key--color-yellow">
+        <div class="key key--color-yellow" :class="{ active: this.keyboardObject.down }">
           <v-icon name="arrow-down" />
         </div>
-        <div class="key key--color-yellow">
+        <div class="key key--color-yellow" :class="{ active: this.keyboardObject.right }">
           <v-icon name="arrow-right" />
         </div>
       </div>
     </div>
+    <input
+      type="text"
+      v-on:keyup="keymonitor"
+      v-on:keyup.up="keyDown('up')"
+      v-on:keyup.down="keyDown('down')"
+      v-on:keyup.left="keyDown('left')"
+      v-on:keyup.right="keyDown('right')"
+    />
   </div>
 </template>
 
@@ -221,38 +230,62 @@ export default Vue.extend({
   props: {
     msg: String,
   },
+  data: () => ({
+    keyboardObject: {
+      up: false,
+      down: false,
+      right: false,
+      left: false,
+    },
+  }),
+  methods: {
+    keyDown(keyPressed: string) {
+      this.$set(this.keyboardObject, keyPressed, true);
+    },
+    keymonitor: (event: KeyboardEvent) => {
+      console.log(`keyCode: ${String.fromCharCode(event.keyCode)}`);
+      console.log(`key: ${event.key}`);
+    },
+  },
 });
 </script>
 
 <style scoped lang="scss">
+.active {
+  color: white !important;
+  background: black !important;
+}
 .keyboard {
-  width: 832px;
+  width: 834px;
   height: 314px;
   margin: 0px auto;
   border: 3px solid var(--black);
   border-radius: 10px;
   background: var(--black);
+  display: flex;
+  flex-direction: column;
 }
 
 .row {
   margin-top: 2px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .key {
   width: 50px;
   height: 50px;
-  float: left;
-  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--off-white);
   color: var(--black);
-  line-height: 48px;
+  flex-direction: column;
   text-align: center;
   margin-left: 2px;
   border-radius: 4px;
-  &--symbols {
-    line-height: 25px;
-  }
   &--delete {
     width: 100px;
   }
@@ -286,5 +319,11 @@ export default Vue.extend({
   &--color-red {
     background: var(--red);
   }
+  svg {
+    height: 20px;
+  }
+  // &--symbols {
+  //   // line-height: 25px;
+  // }
 }
 </style>
