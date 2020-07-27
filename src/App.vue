@@ -28,10 +28,12 @@ export default Vue.extend({
   --gray: #dddddd;
   --off-white: #fffff4;
   --black: #111111;
+  --background: #444444;
+  --text: #fffff4;
 }
 
 body {
-  background-color: --off-white;
+  background-color: var(--background);
   font-family: Arial;
   font-size: 16px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -39,14 +41,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .mk-logo {
-  margin-top: 50px;
-  margin-bottom: 15px;
   width: 100px;
   height: 100px;
   border-radius: 100%;
+  border: 5px solid var(--off-white);
 }
 
 br {
@@ -55,9 +61,11 @@ br {
 }
 
 #app {
-  margin-top: 50px;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: -110px;
+}
+
+h1 {
+  font-size: 1.25rem;
 }
 </style>
