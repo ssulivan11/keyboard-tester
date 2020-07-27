@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img class="mk-logo" alt="Mechanical Keyboards Logo" src="./assets/logo.jpg" />
-    <KeyboardDisplay msg="Vortexgear Race 3 - 75% Mechanical Keyboard" />
+    <KeyboardDisplay keyboardType="Vortexgear Race 3 - 75% Mechanical Keyboard" />
   </div>
 </template>
 
