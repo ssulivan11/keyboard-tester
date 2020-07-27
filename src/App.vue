@@ -55,17 +55,8 @@ body {
   border: 5px solid var(--off-white);
 }
 
-br {
-  display: block;
-  margin-top: -5px;
-}
-
 #app {
   text-align: center;
   margin-top: -110px;
-}
-
-h1 {
-  font-size: 1.25rem;
 }
 </style>

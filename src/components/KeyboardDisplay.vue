@@ -4,103 +4,29 @@
     <div class="keyboard">
       <div class="keyboard__display">
         <div class="row" data-test="row-functional-keys">
-          <div class="key key--color-red key--oneandhalf">
-            Esc
-          </div>
-          <div class="key">F1</div>
-          <div class="key">F2</div>
-          <div class="key">F3</div>
-          <div class="key">F4</div>
-          <div class="key key--color-gray">F5</div>
-          <div class="key key--color-gray">F6</div>
-          <div class="key key--color-gray">F7</div>
-          <div class="key key--color-gray">F8</div>
-          <div class="key">F9</div>
-          <div class="key">F10</div>
-          <div class="key">F11</div>
-          <div class="key">F12</div>
-          <div class="key key--color-gray">Pn</div>
-          <div class="key key--oneandhalf key--color-gray">
-            Delete
+          <div
+            v-for="keyboardItem in keyboardRowFunctionalArr"
+            :key="keyboardItem.key"
+            :class="[keyboardItem.classes, keyboardObject[keyboardItem.key] ? 'key--active' : '']"
+          >
+            <span v-html="keyboardItem.key" />
+            <span class="key__sub-key" v-if="keyboardItem.subKey" v-html="keyboardItem.subKey" />
           </div>
         </div>
 
         <div class="row" data-test="row-numeric-keys">
-          <div class="key key--symbols">
-            ~
-            <br />
-            `
+          <div
+            v-for="keyboardItem in keyboardRowNumericArr"
+            :key="keyboardItem.key"
+            :class="[keyboardItem.classes, keyboardObject[keyboardItem.key] ? 'key--active' : '']"
+          >
+            <span v-html="keyboardItem.key" />
+            <span class="key__sub-key" v-if="keyboardItem.subKey" v-html="keyboardItem.subKey" />
           </div>
-          <div class="key key--symbols">
-            !
-            <br />
-            1
-          </div>
-          <div class="key key--symbols">
-            @
-            <br />
-            2
-          </div>
-          <div class="key key--symbols">
-            #
-            <br />
-            3
-          </div>
-          <div class="key key--symbols">
-            $
-            <br />
-            4
-          </div>
-          <div class="key key--symbols">
-            %
-            <br />
-            5
-          </div>
-          <div class="key key--symbols">
-            ^
-            <br />
-            6
-          </div>
-          <div class="key key--symbols">
-            &
-            <br />
-            7
-          </div>
-          <div class="key key--symbols">
-            *
-            <br />
-            8
-          </div>
-          <div class="key key--symbols">
-            (
-            <br />
-            9
-          </div>
-          <div class="key key--symbols">
-            )
-            <br />
-            0
-          </div>
-          <div class="key key--symbols">
-            _
-            <br />
-            -
-          </div>
-          <div class="key key--symbols">
-            +
-            <br />
-            =
-          </div>
-          <div class="key key--delete key--color-gray">
-            Backspace
-          </div>
-          <div class="key key--color-gray">Home</div>
         </div>
 
         <div class="row" data-test="row-one-alpha-keys">
-          <div class="key key--oneandhalf key--color-gray">
-            Tab
-          </div>
+          <div class="key key--oneandhalf key--color-gray">Tab</div>
           <div class="key" :class="{ active: this.keyboardObject.q }">Q</div>
           <div class="key" :class="{ active: this.keyboardObject.w }">W</div>
           <div class="key" :class="{ active: this.keyboardObject.e }">E</div>
@@ -113,26 +39,21 @@
           <div class="key" :class="{ active: this.keyboardObject.p }">P</div>
           <div class="key key--symbols">
             {
-            <br />
-            [
+            <br />[
           </div>
           <div class="key key--symbols">
             }
-            <br />
-            ]
+            <br />]
           </div>
           <div class="key key--symbols key--oneandhalf">
             |
-            <br />
-            \
+            <br />\
           </div>
           <div class="key key--color-gray">PgUp</div>
         </div>
 
         <div class="row" data-test="row-two-alpha-keys">
-          <div class="key key--caps key--color-gray">
-            Caps Lock
-          </div>
+          <div class="key key--caps key--color-gray">Caps Lock</div>
           <div class="key">A</div>
           <div class="key">S</div>
           <div class="key">D</div>
@@ -144,20 +65,24 @@
           <div class="key">L</div>
           <div class="key key--symbols">
             :
-            <br />
-            ;
+            <br />;
           </div>
           <div class="key key--symbols">
             "
-            <br />
-            '
+            <br />'
           </div>
-          <div class="key key--enter key--symbols key--color-gray">enter<br />return</div>
+          <div class="key key--enter key--symbols key--color-gray">
+            enter
+            <br />return
+          </div>
           <div class="key key--color-gray">PgDn</div>
         </div>
 
         <div class="row" data-test="row-three-alpha-keys">
-          <div class="key key--shift-left key--color-green">
+          <div
+            class="key key--shift-left key--color-green"
+            :class="{ active: this.keyboardObject['Left Shift'] }"
+          >
             Shift
           </div>
           <div class="key">Z</div>
@@ -169,23 +94,23 @@
           <div class="key">M</div>
           <div class="key key--symbols">
             >
-            <br />
-            ,
+            <br />,
           </div>
           <div class="key key--symbols">
             &lt;
-            <br />
-            .
+            <br />.
           </div>
           <div class="key key--symbols">
             ?
-            <br />
-            /
+            <br />/
           </div>
-          <div class="key key--oneandhalf key--color-green">
+          <div
+            class="key key--oneandhalf key--color-green"
+            :class="{ active: this.keyboardObject['Right Shift'] }"
+          >
             Shift
           </div>
-          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.up }">
+          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.ArrowUp }">
             <v-icon name="arrow-up" />
           </div>
           <div class="key key--color-gray">End</div>
@@ -193,53 +118,44 @@
 
         <div class="row" data-test="row-functional-keys">
           <div class="key key--color-red key--bottom-funct">Crtl</div>
-          <div class="key key--bottom-funct key--symbols key--color-gray">alt <br />option</div>
+          <div class="key key--bottom-funct key--symbols key--color-gray">
+            alt
+            <br />option
+          </div>
           <div class="key key--bottom-funct key--symbols key--color-gray">
             <v-icon name="command" />command
           </div>
           <div class="key key--spacebar"></div>
           <div class="key key--symbols key--color-gray"><v-icon name="command" />cmd</div>
-          <div class="key key--symbols key--color-gray">alt<br />option</div>
+          <div class="key key--symbols key--color-gray">
+            alt
+            <br />option
+          </div>
           <div class="key key--color-gray">Ctrl</div>
-          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.left }">
+          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.ArrowLeft }">
             <v-icon name="arrow-left" />
           </div>
-          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.down }">
+          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.ArrowDown }">
             <v-icon name="arrow-down" />
           </div>
-          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.right }">
+          <div class="key key--color-yellow" :class="{ active: this.keyboardObject.ArrowRight }">
             <v-icon name="arrow-right" />
           </div>
         </div>
       </div>
       <div class="keyboard__input">
-        <input
-          type="text"
-          v-on:keyup="keyMonitor"
-          v-on:keyup.q="keyDown('q')"
-          v-on:keyup.w="keyDown('w')"
-          v-on:keyup.e="keyDown('e')"
-          v-on:keyup.r="keyDown('r')"
-          v-on:keyup.t="keyDown('t')"
-          v-on:keyup.y="keyDown('y')"
-          v-on:keyup.u="keyDown('u')"
-          v-on:keyup.i="keyDown('i')"
-          v-on:keyup.o="keyDown('o')"
-          v-on:keyup.p="keyDown('p')"
-          v-on:keyup.up="keyDown('up')"
-          v-on:keyup.down="keyDown('down')"
-          v-on:keyup.left="keyDown('left')"
-          v-on:keyup.right="keyDown('right')"
-        />
+        <input type="text" v-on:keyup="keyMonitor" />
       </div>
     </div>
-
-    <h2>{{ active.key }}</h2>
+    <h2 class="keyboard__active-key" :class="{ 'active-key--animate': active.isActive }">
+      {{ active.key }}
+    </h2>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import { keyboardObject, keyboardRowFunctionalArr, keyboardRowNumericArr } from './helperKeys';
 
 export default Vue.extend({
   name: 'KeyboardDisplay',
@@ -247,51 +163,32 @@ export default Vue.extend({
     msg: String,
   },
   data: () => ({
-    active: { key: '-' },
-    keyboardObject: {
-      q: false,
-      w: false,
-      e: false,
-      r: false,
-      t: false,
-      y: false,
-      u: false,
-      i: false,
-      o: false,
-      p: false,
-      a: false,
-      s: false,
-      d: false,
-      f: false,
-      g: false,
-      h: false,
-      j: false,
-      k: false,
-      l: false,
-      up: false,
-      down: false,
-      right: false,
-      left: false,
-    },
+    active: { key: '-', isActive: false },
+    keyboardObject,
+    keyboardRowFunctionalArr,
+    keyboardRowNumericArr,
   }),
   methods: {
-    keyDown(keyPressed: string) {
-      this.$set(this.keyboardObject, keyPressed, true);
-    },
     keyMonitor(event: KeyboardEvent) {
       event.preventDefault();
-      this.$set(this.active, 'key', event.key);
+      // animate active
+      this.$set(this.active, 'isActive', true);
+      setTimeout(() => this.$set(this.active, 'isActive', false), 200);
+
+      // set active and keydown
+      this.$set(this.keyboardObject, event.key, true);
+      if (event.location > 0) {
+        if (event.location === 1) this.$set(this.active, 'key', `Left ${event.key}`);
+        else this.$set(this.active, 'key', `Right ${event.key}`);
+      } else {
+        this.$set(this.active, 'key', event.key);
+      }
     },
   },
 });
 </script>
 
 <style scoped lang="scss">
-.active {
-  color: white !important;
-  background: black !important;
-}
-
 .keyboard {
   position: relative;
 
@@ -328,6 +225,14 @@ export default Vue.extend({
       box-shadow: 0 0 20px #9ecaed;
     }
   }
+
+  &__active-key {
+    transition: all 0.2s ease-in;
+    transform: scale(0.75);
+    &--animate {
+      transform: scale(1.5);
+    }
+  }
 }
 
 .row {
@@ -351,6 +256,10 @@ export default Vue.extend({
   margin-left: 2px;
   border-radius: 4px;
   overflow: hidden;
+  &--active {
+    color: white !important;
+    background: black !important;
+  }
   &--delete {
     width: 100px;
   }
@@ -389,6 +298,9 @@ export default Vue.extend({
   }
   &--symbols {
     line-height: inherit;
+  }
+  &__sub-key {
+    display: block;
   }
 }
 </style>
