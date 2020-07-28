@@ -5,8 +5,13 @@
       :key="keyboardItem.key"
       :class="[keyboardItem.classes, keyboardObject[keyboardItem.key] ? 'key--active' : '']"
     >
-      <span class="key__sub-key" v-if="keyboardItem.subKey" v-html="keyboardItem.subKey" />
-      <span v-html="formatKeyView(keyboardItem.key)" />
+      <span
+        class="key__sub-key"
+        v-if="keyboardItem.subKey"
+        v-html="formatKeyView(keyboardItem.subKey)"
+      />
+      <span v-if="!keyboardItem.icon" v-html="formatKeyView(keyboardItem.key)" />
+      <v-icon v-if="keyboardItem.icon" :name="keyboardItem.icon" />
     </div>
   </div>
 </template>
@@ -51,6 +56,10 @@ export default Vue.extend({
         case 'Delete':
         case 'Home':
         case 'End':
+        case 'Enter':
+        case 'option':
+        case 'cmd':
+        case 'command':
           return initialKey;
         default:
           return initialKey.toUpperCase();
@@ -73,10 +82,8 @@ export default Vue.extend({
   text-align: center;
   margin-left: 2px;
   border-radius: 4px;
-  overflow: hidden;
   &--active {
-    color: white !important;
-    background: black !important;
+    animation: wiggle 0.5s ease-out forwards;
   }
   &--delete {
     width: 100px;
@@ -119,6 +126,24 @@ export default Vue.extend({
   }
   &__sub-key {
     display: block;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  55% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
   }
 }
 </style>

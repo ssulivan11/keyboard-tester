@@ -30,6 +30,7 @@ export default Vue.extend({
   --black: #111111;
   --background: #444444;
   --text: #fffff4;
+  --activated: #ccc;
 }
 
 body {

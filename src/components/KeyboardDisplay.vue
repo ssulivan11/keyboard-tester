@@ -4,27 +4,27 @@
     <div class="keyboard">
       <div class="keyboard__display">
         <div class="row" data-test="row-functional-keys">
-          <KeyDisplay :arr="keyboardRowFunctionalArr" />
+          <KeyDisplay :arr="vortexKeyboard.keyboardRowFunctionalArr" />
         </div>
 
         <div class="row" data-test="row-numeric-keys">
-          <KeyDisplay :arr="keyboardRowNumericArr" />
+          <KeyDisplay :arr="vortexKeyboard.keyboardRowNumericArr" />
         </div>
 
         <div class="row" data-test="row-one-alpha-keys">
-          <KeyDisplay :arr="keyboardRowAlphaOneArr" />
+          <KeyDisplay :arr="vortexKeyboard.keyboardRowAlphaOneArr" />
         </div>
 
         <div class="row" data-test="row-two-alpha-keys">
-          <KeyDisplay :arr="keyboardRowAlphaTwoArr" />
+          <KeyDisplay :arr="vortexKeyboard.keyboardRowAlphaTwoArr" />
         </div>
 
         <div class="row" data-test="row-three-alpha-keys">
-          <KeyDisplay :arr="keyboardRowAlphaThreeArr" />
+          <KeyDisplay :arr="vortexKeyboard.keyboardRowAlphaThreeArr" />
         </div>
 
         <div class="row" data-test="row-control-keys">
-          <KeyDisplay :arr="keyboardRowControlArr" />
+          <KeyDisplay :arr="vortexKeyboard.keyboardRowControlArr" />
         </div>
       </div>
       <div class="keyboard__input">
@@ -32,6 +32,10 @@
       </div>
     </div>
     <h2 class="active-key" :class="{ 'active-key--animate': active.isActive }">{{ active.key }}</h2>
+
+    <button class="audio-button" type="button" v-on:click="toggleAudio">
+      <v-icon :name="this.active.audio ? 'volume-2' : 'volume-x'" />
+    </button>
   </div>
 </template>
 
@@ -39,15 +43,7 @@
 import Vue from 'vue';
 import KeyDisplay from './KeyDisplay.vue';
 
-import {
-  keyboardObject,
-  keyboardRowFunctionalArr,
-  keyboardRowNumericArr,
-  keyboardRowAlphaOneArr,
-  keyboardRowAlphaTwoArr,
-  keyboardRowAlphaThreeArr,
-  keyboardRowControlArr,
-} from './helperKeys';
+import { keyboardObject, vortexKeyboard } from './helperKeys';
 
 export default Vue.extend({
   name: 'KeyboardDisplay',
@@ -58,14 +54,9 @@ export default Vue.extend({
     KeyDisplay,
   },
   data: () => ({
-    active: { key: '-', isActive: false },
+    active: { key: '', isActive: false, audio: false },
     keyboardObject,
-    keyboardRowFunctionalArr,
-    keyboardRowNumericArr,
-    keyboardRowAlphaOneArr,
-    keyboardRowAlphaTwoArr,
-    keyboardRowAlphaThreeArr,
-    keyboardRowControlArr,
+    vortexKeyboard,
   }),
   methods: {
     keyMonitor(event: KeyboardEvent) {
@@ -89,10 +80,14 @@ export default Vue.extend({
       }
       this.$set(this.active, 'key', eventKey);
 
-      const audio = new Audio(
-        `./audio/click-${Math.floor(Math.random() * 3) + 1}.mp3`,
-      );
-      audio.play();
+      if (this.active.audio) {
+        new Audio(
+          `./audio/click-${Math.floor(Math.random() * 3) + 1}.mp3`,
+        ).play();
+      }
+    },
+    toggleAudio() {
+      this.$set(this.active, 'audio', !this.active.audio);
     },
   },
 });
@@ -151,5 +146,17 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.audio-button {
+  background: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 15px;
+  opacity: 0.25;
+  color: var(--off-white);
 }
 </style>
