@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <img class="mk-logo" alt="Mechanical Keyboards Logo" src="./assets/logo.jpg" />
+    <header class="header">
+      <img class="header__logo" alt="Mechanical Keyboards Logo" src="./assets/logo.jpg" />
+    </header>
     <KeyboardDisplay keyboardType="Vortexgear Race 3 - 75% Mechanical Keyboard" />
   </div>
 </template>
@@ -30,7 +32,9 @@ export default Vue.extend({
   --black: #111111;
   --background: #444444;
   --text: #fffff4;
-  --activated: #ccc;
+  --activated: #228b22;
+  --active: #7cfc00;
+  --outline: #9ecaed;
 }
 
 body {
@@ -47,17 +51,34 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  overflow: hidden;
 }
 
-.mk-logo {
-  width: 100px;
-  height: 100px;
-  border-radius: 100%;
-  border: 5px solid var(--off-white);
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: var(--black);
+  position: fixed;
+  top: 0;
+  left: 0;
+  &__logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+    border: 2px solid var(--off-white);
+    margin-top: 5px;
+  }
 }
 
 #app {
   text-align: center;
-  margin-top: -110px;
 }
 </style>

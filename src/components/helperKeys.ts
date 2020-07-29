@@ -91,7 +91,7 @@ export const vortexKeyboard = {
       subKey: 'command',
       classes: 'key key--bottom-funct key--color-grey',
     },
-    { key: 'space', classes: 'key key--spacebar' },
+    { key: ' ', classes: 'key key--spacebar' },
     {
       key: 'Right Meta',
       icon: 'command',
@@ -140,3 +140,5 @@ export const keyboardObject = {
   ...keyboardRowAlphaThreeObj,
   ...keyboardRowControlObj,
 };
+
+console.warn(keyboardObject);

@@ -3,35 +3,23 @@
     <h1>{{ keyboardType }}</h1>
     <div class="keyboard">
       <div class="keyboard__display">
-        <div class="row" data-test="row-functional-keys">
-          <KeyDisplay :arr="vortexKeyboard.keyboardRowFunctionalArr" />
-        </div>
-
-        <div class="row" data-test="row-numeric-keys">
-          <KeyDisplay :arr="vortexKeyboard.keyboardRowNumericArr" />
-        </div>
-
-        <div class="row" data-test="row-one-alpha-keys">
-          <KeyDisplay :arr="vortexKeyboard.keyboardRowAlphaOneArr" />
-        </div>
-
-        <div class="row" data-test="row-two-alpha-keys">
-          <KeyDisplay :arr="vortexKeyboard.keyboardRowAlphaTwoArr" />
-        </div>
-
-        <div class="row" data-test="row-three-alpha-keys">
-          <KeyDisplay :arr="vortexKeyboard.keyboardRowAlphaThreeArr" />
-        </div>
-
-        <div class="row" data-test="row-control-keys">
-          <KeyDisplay :arr="vortexKeyboard.keyboardRowControlArr" />
+        <div
+          class="row"
+          data-test="row-functional-keys"
+          v-for="keyboardRowArr in vortexKeyboard"
+          :key="keyboardRowArr.key"
+        >
+          <KeyDisplay :arr="keyboardRowArr" :activeKey="active.key" :wasPressed="active.isActive" />
         </div>
       </div>
       <div class="keyboard__input">
         <input type="text" v-on:keyup="keyMonitor" />
       </div>
     </div>
-    <h2 class="active-key" :class="{ 'active-key--animate': active.isActive }">{{ active.key }}</h2>
+    <h2
+      class="active-key"
+      :class="{ 'active-key--animate': active.isActive }"
+    >{{ active.key === " " ? "space" : active.key }}</h2>
 
     <button class="audio-button" type="button" v-on:click="toggleAudio">
       <v-icon :name="this.active.audio ? 'volume-2' : 'volume-x'" />
@@ -54,13 +42,15 @@ export default Vue.extend({
     KeyDisplay,
   },
   data: () => ({
-    active: { key: '', isActive: false, audio: false },
+    active: { key: '...', isActive: false, audio: false },
     keyboardObject,
     vortexKeyboard,
+    page: { hasLoaded: false },
   }),
   methods: {
     keyMonitor(event: KeyboardEvent) {
       event.preventDefault();
+
       // animate active
       this.$set(this.active, 'isActive', true);
       setTimeout(() => this.$set(this.active, 'isActive', false), 200);
@@ -126,17 +116,17 @@ export default Vue.extend({
 
     &:focus {
       outline: none;
-      border-color: #9ecaed;
-      box-shadow: 0 0 20px #9ecaed;
+      border-color: var(--outline);
+      box-shadow: 0 0 20px var(--outline);
     }
   }
 }
 
 .active-key {
-  transition: all 0.2s ease-in;
-  transform: scale(0.75);
+  transition: all 0.2s ease-out;
+  transform: scale(1);
   &--animate {
-    transform: scale(1.5);
+    transform: scale(2.5);
   }
 }
 
@@ -156,6 +146,7 @@ export default Vue.extend({
   cursor: pointer;
   position: absolute;
   bottom: 15px;
+  right: 15px;
   opacity: 0.25;
   color: var(--off-white);
 }

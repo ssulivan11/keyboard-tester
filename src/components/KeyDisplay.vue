@@ -3,7 +3,11 @@
     <div
       v-for="keyboardItem in arr"
       :key="keyboardItem.key"
-      :class="[keyboardItem.classes, keyboardObject[keyboardItem.key] ? 'key--active' : '']"
+      :class="[
+        keyboardItem.classes,
+        keyboardObject[keyboardItem.key] ? 'key--activated' : '',
+        activeKey === keyboardItem.key && wasPressed ? 'key--active' : ''
+      ]"
     >
       <span
         class="key__sub-key"
@@ -24,6 +28,8 @@ export default Vue.extend({
   name: 'KeyDisplay',
   props: {
     arr: Array,
+    activeKey: String,
+    wasPressed: Boolean,
   },
   data: () => ({
     keyboardObject,
@@ -71,8 +77,8 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .key {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,9 +88,8 @@ export default Vue.extend({
   text-align: center;
   margin-left: 2px;
   border-radius: 4px;
-  &--active {
-    animation: wiggle 0.5s ease-out forwards;
-  }
+  border: 2px solid var(--off-white);
+
   &--delete {
     width: 100px;
   }
@@ -108,15 +113,19 @@ export default Vue.extend({
   }
   &--color-gray {
     background: var(--gray);
+    border-color: var(--gray);
   }
   &--color-green {
     background: var(--green);
+    border-color: var(--green);
   }
   &--color-yellow {
     background: var(--yellow);
+    border-color: var(--yellow);
   }
   &--color-red {
     background: var(--red);
+    border-color: var(--red);
   }
   svg {
     height: 20px;
@@ -127,23 +136,38 @@ export default Vue.extend({
   &__sub-key {
     display: block;
   }
+
+  &--activated {
+    background-color: var(--activated);
+    border-color: var(--activated);
+  }
+  &--active {
+    animation: activated 0.2s ease-out;
+    border-color: var(--active);
+  }
 }
 
-@keyframes wiggle {
+@keyframes keypressed {
   0% {
-    transform: rotate(0deg);
+    transform: scale(1);
   }
-  20% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(15deg);
-  }
-  55% {
-    transform: rotate(-15deg);
+  85% {
+    transform: scale(0.9);
   }
   100% {
-    transform: rotate(0deg);
+    transform: scale(1);
+  }
+}
+
+@keyframes activated {
+  0% {
+    transform: scale(1);
+  }
+  85% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>
