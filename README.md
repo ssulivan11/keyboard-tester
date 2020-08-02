@@ -1,5 +1,7 @@
 # vue-keyboard ⌨️
 
+Key testing application for keyboards of choice.
+
 ## Project setup
 
 ```

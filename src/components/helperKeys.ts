@@ -140,5 +140,3 @@ export const keyboardObject = {
   ...keyboardRowAlphaThreeObj,
   ...keyboardRowControlObj,
 };
-
-console.warn(keyboardObject);
