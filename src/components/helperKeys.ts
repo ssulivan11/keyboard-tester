@@ -1,4 +1,4 @@
-export const vortexKeyboard = {
+export const vortex = {
   keyboardRowFunctionalArr: [
     { key: 'Escape', classes: 'key key--color-red key--oneandhalf' },
     { key: 'F1', classes: 'key' },
@@ -105,29 +105,29 @@ export const vortexKeyboard = {
     { key: 'ArrowRight', icon: 'arrow-right', classes: 'key key--color-yellow' },
   ],
 };
-const keyboardRowFunctionalObj = vortexKeyboard.keyboardRowFunctionalArr.reduce(
+const keyboardRowFunctionalObj = vortex.keyboardRowFunctionalArr.reduce(
   (obj, item) => Object.assign(obj, { [item.key]: false }),
   {},
 );
-const keyboardRowNumericObj = vortexKeyboard.keyboardRowNumericArr.reduce(
+const keyboardRowNumericObj = vortex.keyboardRowNumericArr.reduce(
   (obj, item) => Object.assign(obj, { [item.key]: false }),
   {},
 );
-const keyboardRowAlphaOneObj = vortexKeyboard.keyboardRowAlphaOneArr.reduce(
+const keyboardRowAlphaOneObj = vortex.keyboardRowAlphaOneArr.reduce(
   (obj, item) => Object.assign(obj, { [item.key]: false }),
   {},
 );
-const keyboardRowAlphaTwoObj = vortexKeyboard.keyboardRowAlphaTwoArr.reduce(
-  (obj, item) => Object.assign(obj, { [item.key]: false }),
-  {},
-);
-
-const keyboardRowAlphaThreeObj = vortexKeyboard.keyboardRowAlphaThreeArr.reduce(
+const keyboardRowAlphaTwoObj = vortex.keyboardRowAlphaTwoArr.reduce(
   (obj, item) => Object.assign(obj, { [item.key]: false }),
   {},
 );
 
-const keyboardRowControlObj = vortexKeyboard.keyboardRowControlArr.reduce(
+const keyboardRowAlphaThreeObj = vortex.keyboardRowAlphaThreeArr.reduce(
+  (obj, item) => Object.assign(obj, { [item.key]: false }),
+  {},
+);
+
+const keyboardRowControlObj = vortex.keyboardRowControlArr.reduce(
   (obj, item) => Object.assign(obj, { [item.key]: false }),
   {},
 );

@@ -1,19 +1,18 @@
 <template>
   <div>
-    <h1>{{ keyboardType }}</h1>
     <div class="keyboard">
       <div class="keyboard__display">
         <div
           class="row"
           data-test="row-functional-keys"
-          v-for="keyboardRowArr in vortexKeyboard"
+          v-for="keyboardRowArr in vortex"
           :key="keyboardRowArr.key"
         >
           <KeyDisplay :arr="keyboardRowArr" :activeKey="active.key" :wasPressed="active.isActive" />
         </div>
       </div>
       <div class="keyboard__input">
-        <input type="text" v-on:keyup="keyMonitor" />
+        <input data-test="keyboard-input" type="text" v-on:keyup="keyMonitor" />
       </div>
     </div>
     <h2
@@ -31,7 +30,7 @@
 import Vue from 'vue';
 import KeyDisplay from './KeyDisplay.vue';
 
-import { keyboardObject, vortexKeyboard } from './helperKeys';
+import { keyboardObject, vortex } from './helperKeys';
 
 export default Vue.extend({
   name: 'KeyboardDisplay',
@@ -44,7 +43,7 @@ export default Vue.extend({
   data: () => ({
     active: { key: '...', isActive: false, audio: false },
     keyboardObject,
-    vortexKeyboard,
+    vortex,
     page: { hasLoaded: false },
   }),
   methods: {

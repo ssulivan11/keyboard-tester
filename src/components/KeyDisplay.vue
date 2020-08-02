@@ -8,6 +8,7 @@
         keyboardObject[keyboardItem.key] ? 'key--activated' : '',
         activeKey === keyboardItem.key && wasPressed ? 'key--active' : ''
       ]"
+      :data-test="`key-${formatDataTest(keyboardItem.key)}`"
     >
       <span
         class="key__sub-key"
@@ -35,6 +36,7 @@ export default Vue.extend({
     keyboardObject,
   }),
   methods: {
+    formatDataTest: (key: string) => key.toLowerCase().replace(/\s/g, '-'),
     formatKeyView: (initialKey: string) => {
       switch (initialKey) {
         case 'Escape':

@@ -2,8 +2,16 @@
   <div id="app">
     <header class="header">
       <img class="header__logo" alt="Mechanical Keyboards Logo" src="./assets/logo.jpg" />
+      <select class="header__select" v-model="selected">
+        <option
+          v-for="option in options"
+          v-bind:value="option.value"
+          v-bind:key="option.value"
+        >{{ option.text }}</option>
+      </select>
     </header>
-    <KeyboardDisplay keyboardType="Vortexgear Race 3 - 75% Mechanical Keyboard" />
+
+    <KeyboardDisplay :keyboardType="selected" />
   </div>
 </template>
 
@@ -19,6 +27,13 @@ export default Vue.extend({
   components: {
     KeyboardDisplay,
   },
+  data: () => ({
+    selected: 'vortex',
+    options: [
+      { text: 'Vortex Race 3', value: 'vortex' },
+      { text: 'Apple Magic Keyboard', value: 'apple' },
+    ],
+  }),
 });
 </script>
 
@@ -29,7 +44,7 @@ export default Vue.extend({
   --red: #cd2626;
   --gray: #dddddd;
   --off-white: #fffff4;
-  --black: #111111;
+  --black: #222;
   --background: #444444;
   --text: #fffff4;
   --activated: #228b22;
@@ -54,27 +69,34 @@ body {
   overflow: hidden;
 }
 
-h1 {
-  font-size: 1.5rem;
-}
-
 h2 {
   font-size: 1.25rem;
 }
 
 .header {
   width: 100%;
-  height: 60px;
+  height: 65px;
   background-color: var(--black);
   position: fixed;
   top: 0;
   left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &__logo {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     border: 2px solid var(--off-white);
-    margin-top: 5px;
+    margin-right: 20px;
+  }
+  &__select {
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--off-white);
+    font-size: 1.25rem;
+    color: var(--text);
   }
 }
 
