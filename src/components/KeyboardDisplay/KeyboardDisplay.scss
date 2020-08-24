@@ -1,0 +1,66 @@
+.keyboard {
+  position: relative;
+
+  &__display {
+    width: 834px;
+    height: 314px;
+    margin: 0px auto;
+    border: 3px solid var(--black);
+    border-radius: 10px;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  &__input input {
+    width: 834px;
+    height: 314px;
+    margin: 0px auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 0;
+    border-radius: 10px;
+    transition: all 0.25s ease-in-out;
+
+    &:focus {
+      outline: none;
+      border-color: var(--outline);
+      box-shadow: 0 0 20px var(--outline);
+    }
+  }
+}
+
+.active-key {
+  transition: all 0.2s ease-out;
+  transform: scale(1);
+  &--animate {
+    transform: scale(2.5);
+  }
+}
+
+.row {
+  margin-top: 1px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.audio-button {
+  background: none;
+  border: none;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0.25;
+  color: var(--off-white);
+}
