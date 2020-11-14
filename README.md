@@ -1,6 +1,6 @@
 # Keyboard Tester
 
-### Built with Vue 3 ⌨️
+### Built with Vue ⌨️
 
 Key testing application for keyboards of choice.
 
